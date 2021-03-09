@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Skill
+ * @package App\Entity
+ * @ORM\Entity
  */
 class Skill
 {
@@ -13,7 +15,7 @@ class Skill
      * @var int/null
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(type="integer)
+     * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
@@ -31,7 +33,7 @@ class Skill
 
     /**
      * @var int/null
-     * @ORM\Colum(type="integer")
+     * @ORM\Column(type="integer")
      */
     private ?int $time = null;
 

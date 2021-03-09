@@ -7,49 +7,51 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Formation
+ * @package App\Entity
+ * @ORM\Entity
  */
 class Formation
 {
     /**
-     * @var int/null
+     * @var int|null
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(type="integer)
+     * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
-     * @var string/null
+     * @var string|null
      * @ORM\Column
      */
     private ?string $name = null;
 
     /**
-     * @var int/null
+     * @var int|null
      * @ORM\Column(type="integer")
      */
     private ?int $gradeLevel = null;
 
     /**
-     * @var string/null
-     * @ORM\Colum(type="text")
+     * @var string|null
+     * @ORM\Column(type="text")
      */
     private ?string $description = null;
 
     /**
-     * @var DateTimeInterface/null
-     * @ORM\Colum(type="date_immutable")
+     * @var DateTimeInterface|null
+     * @ORM\Column(type="date_immutable")
      */
     private ?DateTimeInterface $startedAt = null;
 
     /**
-     * @var DateTimeInterface/null
-     * @ORM\Colum(type="date_immutable, nullable=true")
+     * @var DateTimeInterface|null
+     * @ORM\Column(type="date_immutable", nullable=true)
      */
     private ?DateTimeInterface $endedAt = null;
 
     /**
-     * @return int/null
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -57,7 +59,7 @@ class Formation
     }
 
     /**
-     * @return string/null $name
+     * @return string|null $name
      */
     public function getName(): ?string
     {
@@ -73,23 +75,39 @@ class Formation
     }
 
     /**
-     * @return int/null
+     * @return int|null
      */
     public function getLevel(): ?int
     {
-        return $this->level;
+        return $this->gradeLevel;
     }
 
     /**
-     * @param int/null $level
+     * @param int|null $gradeLevel
      */
-    public function setLevel(int $level): void
+    public function setLevel(int $gradeLevel): void
     {
-        $this->level = $level;
+        $this->gradeLevel = $gradeLevel;
     }
 
     /**
-     * @return DateTimeInterface/null
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return DateTimeInterface|null
      */
     public function getStartedAt(): ?DateTimeInterface
     {
@@ -97,7 +115,7 @@ class Formation
     }
 
     /**
-     * @param DateTimeInterface/null $startedAt
+     * @param DateTimeInterface|null $startedAt
      */
     public function setStartedAt(?DateTimeInterface $startedAt): void
     {
@@ -105,15 +123,15 @@ class Formation
     }
 
     /**
-     * @return DateTimeInterface/null
+     * @return DateTimeInterface|null
      */
     public function getEndedAt(): ?DateTimeInterface
     {
-        return $this->startedAt;
+        return $this->endedAt;
     }
 
     /**
-     * @param DateTimeInterface/null $endedAt
+     * @param DateTimeInterface|null $endedAt
      */
     public function setEndedAt(?DateTimeInterface $endedAt): void
     {
