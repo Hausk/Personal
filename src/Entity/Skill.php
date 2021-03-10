@@ -3,16 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint as Assert;
 
 /**
  * Class Skill
  * @package App\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\SkillRepository")
  */
 class Skill
 {
     /**
-     * @var int/null
+     * @var int|null
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
@@ -22,20 +23,22 @@ class Skill
     /**
      * @var string/null
      * @ORM\Column
+     * @Assert\NotBlank(message="Ce champs doit être remplit")
      */
     private ?string $name = null;
 
     /**
      * @var int/null
      * @ORM\Column(type="integer")
+     * @Assert\notBlank(message="Ce champs doit être remplit")
+     * @Assert\Range(
+     *      min=1, 
+     *      max=10,
+     *      minMessage="Le niveau doit être supérieur à 0 !",
+     *      maxMessage="Le niveau doit être inférieur à 11 !"
+     * )
      */
     private ?int $level = null;
-
-    /**
-     * @var int/null
-     * @ORM\Column(type="integer")
-     */
-    private ?int $time = null;
 
     /**
      * @return int/null
@@ -77,19 +80,4 @@ class Skill
         $this->level = $level;
     }
 
-    /**
-     * @return int/null
-     */
-    public function getTime(): ?int
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param int/null $time
-     */
-    public function setTime(?int $time): void
-    {
-        $this->time = $time;
-    }
 }
