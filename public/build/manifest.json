@@ -1,0 +1,11 @@
+{
+  "build/app.css": "/build/app.css",
+  "build/app.js": "/build/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors-node_modules_bootstrap_dist_js_bootstrap_js.js": "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_js.js",
+  "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.0454203f.svg",
+  "build/fonts/fa-solid-900.eot": "/build/fonts/fa-solid-900.6606667d.eot",
+  "build/fonts/fa-solid-900.ttf": "/build/fonts/fa-solid-900.915a0b79.ttf",
+  "build/fonts/fa-solid-900.woff": "/build/fonts/fa-solid-900.f4f93856.woff",
+  "build/fonts/fa-solid-900.woff2": "/build/fonts/fa-solid-900.3eb06c70.woff2"
+}
