@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Skill
@@ -21,27 +21,27 @@ class Skill
     private ?int $id = null;
 
     /**
-     * @var string/null
+     * @var string|null
      * @ORM\Column
-     * @Assert\NotBlank(message="Ce champs doit être remplit")
+     * @Assert\NotBlank(message="Ce champs ne peut pas être vide.")
      */
     private ?string $name = null;
 
     /**
-     * @var int/null
+     * @var int|null
      * @ORM\Column(type="integer")
-     * @Assert\notBlank(message="Ce champs doit être remplit")
+     * @Assert\NotBlank(message="Ce champs ne peut pas être vide.")
      * @Assert\Range(
-     *      min=1, 
-     *      max=10,
-     *      minMessage="Le niveau doit être supérieur à 0 !",
-     *      maxMessage="Le niveau doit être inférieur à 11 !"
+     *     min=1,
+     *     max=10,
+     *     minMessage="Le niveau doit être supérieur ou égal à 1",
+     *     maxMessage="Le niveau doit être inférieur ou égal à 10"
      * )
      */
     private ?int $level = null;
 
     /**
-     * @return int/null
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -49,7 +49,7 @@ class Skill
     }
 
     /**
-     * @return string/null $name
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -57,15 +57,15 @@ class Skill
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return int/null
+     * @return int|null
      */
     public function getLevel(): ?int
     {
@@ -73,11 +73,10 @@ class Skill
     }
 
     /**
-     * @param int/null $level
+     * @param int|null $level
      */
-    public function setLevel(int $level): void
+    public function setLevel(?int $level): void
     {
         $this->level = $level;
     }
-
 }

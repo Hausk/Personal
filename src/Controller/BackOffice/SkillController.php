@@ -4,11 +4,11 @@ namespace App\Controller\BackOffice;
 use App\Entity\Skill;
 use App\Form\SkillType;
 use App\Repository\SkillRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class SkillController
@@ -34,7 +34,7 @@ class SkillController extends AbstractController
     /**
      * @Route("/create", name="skill_create")
      * @param Request $request
-     * @return $response
+     * @return Response
      */
     public function create(Request $request): Response
     {
@@ -43,7 +43,8 @@ class SkillController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->persist($skill);
-            $this->addFlash("success", "la Compétence a été ajoutée aveec succès !");
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "La compétence a été ajoutée avec succès !");
 
             return $this->redirectToRoute("skill_manage");
         }
@@ -53,13 +54,41 @@ class SkillController extends AbstractController
         ]);
     }
 
-    public function update(): Response
+    /**
+     * @Route("/edit_{name}", name="skill_update")
+     * @param Skill $skill
+     * @param Request $request
+     * @return Response
+     */
+    public function update(Skill $skill, Request $request): Response
     {
+        $form = $this->createForm(SkillType::class, $skill)->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "La compétence a été modifée avec succès !");
+
+            return $this->redirectToRoute("skill_manage");
+        }
+
+        return $this->render("back_office/skill/edit.html.twig", [
+            "form" => $form->createView()
+        ]);
     }
 
-    public function delete(): RedirectResponse
+    /**
+     * @Route("/{id}/delete", name="skill_delete")
+     * @param Skill $skill
+     * @return RedirectResponse
+     */
+    public function delete(Skill $skill): RedirectResponse
     {
+        $this->getDoctrine()->getManager()->remove($skill);
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash("success", "La compétence a été supprimée avec succès !");
 
+        return $this->redirectToRoute("skill_manage");
     }
+
+    
 }

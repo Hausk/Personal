@@ -71,5 +71,4 @@ class Media
     {
         $this->portfolio = $portfolio;
     }
-
 }

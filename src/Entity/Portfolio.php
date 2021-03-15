@@ -136,8 +136,6 @@ class Portfolio
         if ($this->medias->contains($media)) {
             $media->setPortfolio(null);
             $this->medias->removeElement($media);
-
         }
     }
-   
 }
