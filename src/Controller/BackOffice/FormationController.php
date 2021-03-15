@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\BackOffice;
 
 use App\Entity\Formation;
@@ -13,21 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class FormationController
  * @package App\Controller\BackOffice
- * @Route("/admin/Formations")
+ * @Route("/admin/formations")
  */
 class FormationController extends AbstractController
 {
     /**
-     * @Route(name="ormation_manage")
-     * @param FormationRepository $FormationRepository
+     * @Route(name="formation_manage")
+     * @param FormationRepository $formationRepository
      * @return Response
      */
-    public function manage(FormationRepository $FormationRepository): Response
+    public function manage(FormationRepository $formationRepository): Response
     {
         $formations = $formationRepository->findAll();
 
         return $this->render("back_office/formation/manage.html.twig", [
-            "Formations" => $formations
+            "formations" => $formations
         ]);
     }
 
@@ -38,13 +39,13 @@ class FormationController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        $Formation = new Formation();
+        $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->persist($formation);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("success", "La compétence a été ajoutée avec succès !");
+            $this->addFlash("success", "La formation a été ajoutée avec succès !");
 
             return $this->redirectToRoute("formation_manage");
         }
@@ -55,7 +56,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/edit_{name}", name="formation_update")
+     * @Route("/{id}/update", name="formation_update")
      * @param Formation $formation
      * @param Request $request
      * @return Response
@@ -66,12 +67,12 @@ class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("success", "La compétence a été modifée avec succès !");
+            $this->addFlash("success", "La formation a été modifiée avec succès !");
 
-            return $this->redirectToRoute("Formation_manage");
+            return $this->redirectToRoute("formation_manage");
         }
 
-        return $this->render("back_office/Formation/edit.html.twig", [
+        return $this->render("back_office/formation/edit.html.twig", [
             "form" => $form->createView()
         ]);
     }
@@ -85,8 +86,8 @@ class FormationController extends AbstractController
     {
         $this->getDoctrine()->getManager()->remove($formation);
         $this->getDoctrine()->getManager()->flush();
-        $this->addFlash("success", "La compétence a été supprimée avec succès !");
+        $this->addFlash("success", "La formation a été supprimée avec succès !");
 
         return $this->redirectToRoute("formation_manage");
-    } 
+    }
 }

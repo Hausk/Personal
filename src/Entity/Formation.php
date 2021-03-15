@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Formation
@@ -23,24 +24,28 @@ class Formation
     /**
      * @var string|null
      * @ORM\Column
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private ?string $name = null;
 
     /**
      * @var int|null
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private ?int $gradeLevel = null;
 
     /**
      * @var string|null
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private ?string $description = null;
 
     /**
      * @var DateTimeInterface|null
      * @ORM\Column(type="date_immutable")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private ?DateTimeInterface $startedAt = null;
 
@@ -59,7 +64,7 @@ class Formation
     }
 
     /**
-     * @return string|null $name
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -67,9 +72,9 @@ class Formation
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -77,7 +82,7 @@ class Formation
     /**
      * @return int|null
      */
-    public function getLevel(): ?int
+    public function getGradeLevel(): ?int
     {
         return $this->gradeLevel;
     }
@@ -85,12 +90,12 @@ class Formation
     /**
      * @param int|null $gradeLevel
      */
-    public function setLevel(int $gradeLevel): void
+    public function setGradeLevel(?int $gradeLevel): void
     {
         $this->gradeLevel = $gradeLevel;
     }
 
-    /**
+     /**
      * @return string|null
      */
     public function getDescription(): ?string

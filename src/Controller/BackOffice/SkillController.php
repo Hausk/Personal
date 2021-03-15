@@ -88,7 +88,5 @@ class SkillController extends AbstractController
         $this->addFlash("success", "La compétence a été supprimée avec succès !");
 
         return $this->redirectToRoute("skill_manage");
-    }
-
-    
+    } 
 }

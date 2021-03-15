@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% block title %}Creation Formation{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+            {{ form_start(form) }}
+                <div class="card">
+                    <div class="card-header">Création d'une nouvelle Formation</div>
+                    <div class="card-body">
+                        {{ form_errors(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.gradeLevel) }}
+                        {{ form_row(form.startedAt) }}
+                        {{ form_row(form.endedAt) }}
+                        {{ form_row(form.description) }}
+                    </div>
+                <div class="card-footer">
+                    <a href="{{ path("formation_manage") }}" class="btn btn-secondary">Retour</a>
+                    <button class="btn btn-primary">Ajouter</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
